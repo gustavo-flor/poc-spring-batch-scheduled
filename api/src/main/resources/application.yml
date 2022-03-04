@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/poc-scheduler?authSource=admin
+  cloud:
+    stream:
+      kafka:
+        binder:
+          autoCreateTopics: false
+          autoAddPartitions: true
+          brokers: localhost:9092
+      bindings:
+        sendMail-out-0:
+          destination: send_email-event
+          contentType: application/json
+          producer:
+            partitionCount: 1
+        sendPush-out-0:
+          destination: send_push-event
+          contentType: application/json
+          producer:
+            partitionCount: 1
